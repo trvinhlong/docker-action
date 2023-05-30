@@ -28,12 +28,12 @@ jobs:
         push: true
         tags: $DOCKER_IMAGE
     - name: Deploy code to server
-        run: |
-          mkdir -p ~/.ssh
-          chmod 755 ~/.ssh
-          ssh-keyscan -H $DEPLOY_HOST >> ~/.ssh/known_hosts
-          echo "$SSH_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh -o StrictHostKeyChecking=no ubuntu@$DEPLOY_HOST "docker pull $DOCKER_IMAGE"
-          ssh -o StrictHostKeyChecking=no ubuntu@$DEPLOY_HOST "docker stop longtv_github || true && docker rm longtv_github || true"
-          ssh -o StrictHostKeyChecking=no ubuntu@$DEPLOY_HOST "docker run -p 3002:80 -d --name longtv_github $DOCKER_IMAGE"
+      run: |
+        mkdir -p ~/.ssh
+        chmod 755 ~/.ssh
+        ssh-keyscan -H $DEPLOY_HOST >> ~/.ssh/known_hosts
+        echo "$SSH_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh -o StrictHostKeyChecking=no ubuntu@$DEPLOY_HOST "docker pull $DOCKER_IMAGE"
+        ssh -o StrictHostKeyChecking=no ubuntu@$DEPLOY_HOST "docker stop longtv_github || true && docker rm longtv_github || true"
+        ssh -o StrictHostKeyChecking=no ubuntu@$DEPLOY_HOST "docker run -p 3002:80 -d --name longtv_github $DOCKER_IMAGE"
