@@ -28,7 +28,6 @@ jobs:
         push: true
         tags: $DOCKER_IMAGE
     - name: Deploy code to server
-        id: build-deploy
         run: |
           mkdir -p ~/.ssh
           chmod 755 ~/.ssh
