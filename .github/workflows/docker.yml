@@ -26,7 +26,7 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         push: true
-        tags: $DOCKER_IMAGE
+        tags: ${{ secrets.DOCKER_IMAGE }}
     - name: Deploy code to server
       run: |
         mkdir -p ~/.ssh
